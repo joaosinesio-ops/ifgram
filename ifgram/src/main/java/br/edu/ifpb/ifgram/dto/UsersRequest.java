@@ -14,8 +14,5 @@ public record UsersRequest(
 
         @Size(min=4)
         @NotNull
-        String senha)
-{
-
-
+        String senha) {
 }
