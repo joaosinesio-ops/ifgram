@@ -3,7 +3,7 @@ package br.edu.ifpb.ifgram.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "tb_user")
     public class User {
 
     @Id
@@ -28,7 +28,19 @@ import jakarta.persistence.*;
         return email;
     }
 
-    public User( String nome, String email) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(String nome, String email) {
         this.nome = nome;
         this.email = email;
     }

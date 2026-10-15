@@ -7,6 +7,8 @@ import br.edu.ifpb.ifgram.repository.UsersRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsersService {
 
@@ -22,4 +24,17 @@ public class UsersService {
         User salvo = repository.save(new User(request.nome(), request.email()));
         return UsersResponse.from(salvo);
     }
+
+    public UsersResponse atualizarUsuario(UsersRequest request) throws Exception {
+        Optional<User> usuario = repository.findByEmail(request.email());
+        if (usuario.isEmpty()){
+            throw new Exception("usuário não existe na base dedos");
+        }
+        User usuarioSalvo = usuario.get();
+        usuarioSalvo.setNome(request.nome());
+        repository.save(usuarioSalvo);
+
+        return UsersResponse.from(usuarioSalvo);
+    }
 }
+

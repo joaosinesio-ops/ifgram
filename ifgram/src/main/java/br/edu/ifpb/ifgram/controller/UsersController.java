@@ -1,11 +1,20 @@
 package br.edu.ifpb.ifgram.controller;
 
+import br.edu.ifpb.ifgram.dto.UsersRequest;
+import br.edu.ifpb.ifgram.dto.UsersResponse;
+import br.edu.ifpb.ifgram.service.UsersService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("jota")
+@RequestMapping("user")
 
 public class UsersController {
+
+    public final UsersService service;
+
+    public UsersController(UsersService service){
+        this.service = service;
+    }
 
     @GetMapping
     public String getUsers(){
@@ -22,8 +31,8 @@ public class UsersController {
     }
 
     @PutMapping
-    public String putUser(){
-        return "chamei o endpoint PUT";
+    public UsersResponse putUser(UsersRequest request) throws Exception {
+        return service.atualizarUsuario(request);
     }
 
     @PatchMapping
